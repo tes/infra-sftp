@@ -134,10 +134,6 @@ if [ ! -f /firstrun ]; then
 	echo 'For security reasons the user credentials are not listed here.'
 	echo 'To get the passwords run this:'
 	echo "docker cp some-container:/sftp_pass ."
-	echo
-	echo 'For more information, see the official README.md'
-	echo 'Link: http://registry.hub.docker.com/u/asavartzeth/sftp/'
-	echo 'Link: http://github.com/AsavarTzeth/docker-sftp/'
 	echo '================================================================================='
 	echo
 fi

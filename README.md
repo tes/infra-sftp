@@ -1,6 +1,6 @@
 #Supported tags and respective `Dockerfile` links#
 
-- [`6`, `6.6`, `latest` *(Dockerfile)*](https://github.com/AsavarTzeth/docker-sftp/blob/master/Dockerfile)
+- [`2.0.0`, `latest` *(Dockerfile)*](https://github.com/ShortSharpCode/docker-sftp/blob/master/Dockerfile)
 
 #What is OpenSSH?#
 
@@ -14,25 +14,25 @@ OpenSSH (OpenBSD Secure Shell) is a set of computer programs that provides encry
 
 ##Deploying a simple sftp instance##
 
-    docker run --name some-sftp -P -d asavartzeth/sftp
+    docker run --name some-sftp -P -d shortsharpcode/sftp
 
 The port will be randomly chosen by the docker daemon. You may of course specify any port you wish.
 
-    docker run --name some-sftp -p xxxx:22 -d asavartzeth/sftp
+    docker run --name some-sftp -p xxxx:22 -d shortsharpcode/sftp
 
 By default your data is shared as standard Docker volumes. If you are unsure of what this means or simply have other needs I recommend you read the next section: **"Storing your data"**.
 
 ##Storing your data##
 ###Storing data in SFTP container###
 
-    docker run --name some-sftp -e SFTP_TEST=true -P -d asavartzeth/sftp
+    docker run --name some-sftp -e SFTP_TEST=true -P -d shortsharpcode/sftp
 
 This will create a directory inside the container in which all files will be stored. You should not try to mount external volumes when using this option.
 
 ###Storing data in a data volume container###
 
     docker run --name sftp-data -v /data/sftp tianon/true
-    docker run --name some-sftp --volumes-from sftp-data -P -d asavartzeth/sftp
+    docker run --name some-sftp --volumes-from sftp-data -P -d shortsharpcode/sftp
 
 This will pull down the tiny [tianon/true](https://registry.hub.docker.com/u/tianon/true/) container (unless you have it already) and set it to share /data/sftp. The second command does the deployment as normal, with the addition of mounting the shared volume at /data/sftp.
 
@@ -44,7 +44,7 @@ _See **Configuration Options** bellow, regarding $SFTP_DATA_DIR details (default
 
 ###Storing data in a host directory###
 
-    docker run --name some-sftp -v /path/container-data/sftp:/data/sftp -P -d asavartzeth/sftp
+    docker run --name some-sftp -v /path/container-data/sftp:/data/sftp -P -d shortsharpcode/sftp
 
 This is using the same principle as above. But instead of mounting the volume of another container you will mount a host directory.
 
@@ -54,7 +54,7 @@ A possible downside to this approach might be lesser portability of your data.
 
 ##Exposing files & directories to the instance##
 
-    docker run --name some-sftp -v /path/dir:$SFTP_DATA_DIR/chroot/share/dir -P -d asavartzeth/sftp
+    docker run --name some-sftp -v /path/dir:$SFTP_DATA_DIR/chroot/share/dir -P -d shortsharpcode/sftp
 
 Preferably you would do this when you first deploy the container. However, you could certainly do the deployment as instructed under **"Deploying a simple sftp instance"**, commit and then re-deploy.
 
@@ -68,7 +68,7 @@ If you wish to adapt the default configuration, use something like the following
 
 You can use the modified configuration with:
 
-    docker run --name some-sftp -v /some/path:/etc/ssh:ro -P -d asavartzeth/sftp
+    docker run --name some-sftp -v /some/path:/etc/ssh:ro -P -d shortsharpcode/sftp
 
 #Configuration Options#
 
