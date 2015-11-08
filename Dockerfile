@@ -1,5 +1,5 @@
 FROM debian:wheezy
-MAINTAINER Patrik Nilsson <asavartzeth@gmail.com>
+MAINTAINER Dalibor Novak <boreplusplus@gmail.com>
 
 ENV OPENSSH_VERSION 1:6.6p1-4~bpo70+1
 

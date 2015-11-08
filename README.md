@@ -23,6 +23,12 @@ The port will be randomly chosen by the docker daemon. You may of course specify
 By default your data is shared as standard Docker volumes. If you are unsure of what this means or simply have other needs I recommend you read the next section: **"Storing your data"**.
 
 ##Storing your data##
+###Storing data in SFTP container###
+
+    docker run --name some-sftp -e SFTP_TEST=true -P -d asavartzeth/sftp
+
+This will create a directory inside the container in which all files will be stored. You should not try to mount external volumes when using this option.
+
 ###Storing data in a data volume container###
 
     docker run --name sftp-data -v /data/sftp tianon/true
@@ -71,19 +77,9 @@ This is a full list of environment variables that will be used in the configurat
 - -e `SFTP_USER=...` (defaults to sftp1)
 - -e `SFTP_UID=...` (defaults to 2001)
 - -e `SFTP_PASS=...` (defaults to randomly generated password)
-- -e `SFTP_LOG_LEVEL=...` (defaults to INFO)  
+- -e `SFTP_LOG_LEVEL=...` (defaults to INFO)
 The possible values are: QUIET, FATAL, ERROR, INFO, VERBOSE, DEBUG, DEBUG1, DEBUG2, and DEBUG3.
-- -e `SFTP_DATA_DIR=...` (defaults to /data/sftp)  
+- -e `SFTP_DATA_DIR=...` (defaults to /data/sftp)
 *This will set the location of a data volume. It is used by the runtime script, to enable the transfer of application data to an empty location. This location could be a data volume container, such as [tianon/true](https://registry.hub.docker.com/u/tianon/true/), or a location on your host.*
-
-#User Feedback#
-
-##Issues##
-
-If you have any problems with or questions about this image, please contact me through a [GitHub](https://github.com/asavartzeth/docker-sftp/issues) issue.
-
-##Contributing##
-
-You are welcome to contribute new features, fixes, or updates, large or small; I always welcome pull requests, and I will do my best to process them without delay.
-
-Before you start to code, I recommend discussing your plans through a GitHub issue, especially for more ambitious contributions. This gives myself, as well as other potential contributors a chance to point you in the right direction, give you feedback on your design, and help you find out if someone else is working on the same thing.
+- -e `SFTP_TEST=...` (defaults to false)
+If set to true this option will configure container to run in standalone mode and store files inside the container itself.

@@ -30,7 +30,10 @@ config_file="$CONF_SSH/sshd_config"
 if [ ! -d $SFTP_DATA_DIR ]; then
 	SFTP_DATA_DIR="/"
 	SFTP_CHROOT="/chroot"
-	if [ ! -f /firstrun ]; then
+	if [ "$SFTP_TEST" = "true"]; then
+		echo >&2 'Running in test mode. Creating data directory in container ...'
+		mkdir -p $SFTP_DATA_DIR
+	elif [ ! -f /firstrun ]; then
 		echo >&2 'Notice: data volume not found! - skipping ...'
 		echo >&2 '  Data is important. Make sure you have read & understood "Managing Data in Containers",'
 		echo >&2 '  in the official docker documentation. Examples tailored to this container may be found in the README.'
@@ -100,7 +103,17 @@ for i in "${users[@]}"; do
 		mkdir -p $SFTP_CHROOT/$user
 	fi
 
-	chown root:root $SFTP_CHROOT/$user
+	if [ "$SFTP_TEST" = "true" ]; then
+		if [-n "$gid"]; then
+			owner="$uid:$gid"
+		else
+			owner=$uid
+		fi
+	else
+		owner="root:root"
+	fi
+
+	chown $owner $SFTP_CHROOT/$user
 	chmod 755 $SFTP_CHROOT/$user
 
 	# Checks if passwords have been set, using
