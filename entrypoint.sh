@@ -104,7 +104,7 @@ for i in "${users[@]}"; do
 	fi
 
 	if [ "$SFTP_TEST" = "true" ]; then
-		if [-n "$gid"]; then
+		if [ -n "$gid" ]; then
 			owner="$uid:$gid"
 		else
 			owner=$uid
