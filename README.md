@@ -1,6 +1,6 @@
 #Supported tags and respective `Dockerfile` links#
 
-- [`2.0.0`, `latest` *(Dockerfile)*](https://github.com/ShortSharpCode/docker-sftp/blob/master/Dockerfile)
+- [`2.0.1`, `latest` *(Dockerfile)*](https://github.com/ShortSharpCode/docker-sftp/blob/master/Dockerfile)
 
 #What is OpenSSH?#
 
