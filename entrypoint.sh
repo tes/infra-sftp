@@ -30,7 +30,7 @@ config_file="$CONF_SSH/sshd_config"
 if [ ! -d $SFTP_DATA_DIR ]; then
 	SFTP_DATA_DIR="/"
 	SFTP_CHROOT="/chroot"
-	if [ "$SFTP_TEST" = "true"]; then
+	if [ "$SFTP_TEST" = "true" ]; then
 		echo >&2 'Running in test mode. Creating data directory in container ...'
 		mkdir -p $SFTP_DATA_DIR
 	elif [ ! -f /firstrun ]; then
@@ -104,7 +104,7 @@ for i in "${users[@]}"; do
 	fi
 
 	if [ "$SFTP_TEST" = "true" ]; then
-		if [-n "$gid"]; then
+		if [ -n "$gid" ]; then
 			owner="$uid:$gid"
 		else
 			owner=$uid
