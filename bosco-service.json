@@ -1,0 +1,22 @@
+{
+	"tags": ["sftp", "upload"],
+	"service": {
+		"type":"docker",
+		"name":"sftp",
+		"registry":"docker.io",
+		"username": "shortsharpcode",
+		"version": "latest",
+      "alwaysPull": true,
+      "checkTimeout": 30000,
+      "docker":{
+          "HostConfig": {
+              "PortBindings": {
+                  "22/tcp": [{
+                      "HostIp": "0.0.0.0",
+                      "HostPort": "2222"
+                   }]
+              }
+          }
+      }
+	}
+}
