@@ -1,22 +1,27 @@
 {
-	"tags": ["sftp", "upload"],
-	"service": {
-		"type":"docker",
-		"name":"sftp",
-		"registry":"docker.io",
-		"username": "shortsharpcode",
-		"version": "latest",
-      "alwaysPull": true,
-      "checkTimeout": 30000,
-      "docker":{
-          "HostConfig": {
-              "PortBindings": {
-                  "22/tcp": [{
-                      "HostIp": "0.0.0.0",
-                      "HostPort": "2222"
-                   }]
-              }
-          }
+  "tags": ["sftp", "upload"],
+  "service": {
+    "type": "docker",
+    "name": "sftp",
+    "registry": "docker.io",
+    "username": "shortsharpcode",
+    "version": "latest",
+    "alwaysPull": true,
+    "checkTimeout": 30000,
+    "docker": {
+      "Config": {
+        "Env": ["SFTP_USER=sftp", "SFTP_PASS=sftp", "SFTP_TEST=true"]
+      },
+      "HostConfig": {
+        "PortBindings": {
+          "22/tcp": [
+            {
+              "HostIp": "0.0.0.0",
+              "HostPort": "2222"
+            }
+          ]
+        }
       }
-	}
+    }
+  }
 }
